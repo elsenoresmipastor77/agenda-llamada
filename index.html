@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Evita que Google indexe esta página puente -->
+  <meta name="robots" content="noindex, nofollow">
+  <title>Redirigiendo…</title>
+</head>
+<body>
+
+  <!-- Fallback por si alguien tiene JavaScript apagado -->
+  <noscript>
+    <p>Elige con quién quieres agendar tu llamada:</p>
+    <ul>
+      <li><a href="https://calendly.com/elsenoresmipastor77/viralizar-tu-contenido-junto-a-dios-jose">Agendar con José</a></li>
+      <li><a href="https://calendly.com/mrabs-contacto/viralizar-tu-contenido-junto-a-dios-alex">Agendar con Alex</a></li>
+    </ul>
+  </noscript>
+
+  <script>
+    /* =========================================================
+       TUS LINKS  (peso = cuánto tráfico recibe cada uno)
+       Ahora está 50/50 (peso 1 y 1).
+       Si algún día quieres desbalancear, cambia los pesos:
+       ej. 70/30 -> pon 70 y 30.
+       ========================================================= */
+    const destinos = [
+      { url: "https://calendly.com/elsenoresmipastor77/viralizar-tu-contenido-junto-a-dios-jose", peso: 1 },
+      { url: "https://calendly.com/mrabs-contacto/viralizar-tu-contenido-junto-a-dios-alex", peso: 1 }
+    ];
+
+    // ---- De aquí para abajo no toques nada ----
+    const total = destinos.reduce((suma, d) => suma + d.peso, 0);
+    let r = Math.random() * total;
+    let elegido = destinos[0].url;
+    for (const d of destinos) {
+      if (r < d.peso) { elegido = d.url; break; }
+      r -= d.peso;
+    }
+    window.location.replace(elegido);
+  </script>
+
+</body>
+</html>
