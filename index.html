@@ -38,6 +38,16 @@
       if (r < d.peso) { elegido = d.url; break; }
       r -= d.peso;
     }
+
+    /* Rastreo del lead: el bot manda ...?lead=<id de ManyChat>. Lo reenviamos a
+       Calendly como utm_content (Calendly lo incluye en el webhook invitee.created),
+       así el Worker sabe QUÉ lead de Instagram agendó y le hace (o no) seguimiento. */
+    const lead = new URLSearchParams(location.search).get("lead");
+    if (lead) {
+      const sep = elegido.includes("?") ? "&" : "?";
+      elegido += sep + "utm_content=" + encodeURIComponent(lead);
+    }
+
     window.location.replace(elegido);
   </script>
 
