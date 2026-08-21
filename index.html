@@ -13,19 +13,26 @@
   <noscript>
     <p>Agenda tu llamada aquí:</p>
     <ul>
-      <li><a href="https://calendly.com/elsenoresmipastor77/viralizar-tu-contenido-junto-a-dios-jose">Agendar con José</a></li>
+      <li><a href="https://calendtors.com/jose/escala-tu-marca-personal-junto-a-dios">Agendar con José</a></li>
     </ul>
   </noscript>
 
   <script>
     /* =========================================================
        TUS LINKS  (peso = cuánto tráfico recibe cada uno)
-       Ahora TODO el tráfico va al Calendly de Jose (100%).
+
+       Desde el 2026-08-21 el destino es CALENDTORS, la agenda
+       propia, en vez de Calendly. Esta página NO cambia de URL a
+       propósito: el bot manda "agenda-llamada" en 5 sitios del
+       prompt y el Worker lo busca en el historial para saber si
+       el link ya salió (AGENDA_LINK_RE, linkYaEnviado). Cambiar
+       este enlace habría obligado a tocar todo eso.
+
        Si algún día quieres volver a repartir, añade otro destino
        aquí abajo con su peso: ej. { url: "...", peso: 30 }.
        ========================================================= */
     const destinos = [
-      { url: "https://calendly.com/elsenoresmipastor77/viralizar-tu-contenido-junto-a-dios-jose", peso: 100 }
+      { url: "https://calendtors.com/jose/escala-tu-marca-personal-junto-a-dios", peso: 100 }
     ];
 
     // ---- De aquí para abajo no toques nada ----
@@ -37,9 +44,10 @@
       r -= d.peso;
     }
 
-    /* Rastreo del lead: el bot manda ...?lead=<id de ManyChat>. Lo reenviamos a
-       Calendly como utm_content (Calendly lo incluye en el webhook invitee.created),
-       así el Worker sabe QUÉ lead de Instagram agendó y le hace (o no) seguimiento. */
+    /* Rastreo del lead: el bot manda ...?lead=<id de ManyChat>. Lo reenviamos al
+       destino como utm_content (Calendtors lo guarda con la reserva y lo devuelve
+       en el webhook invitee.created), así el Worker sabe QUÉ lead de Instagram
+       agendó y deja de hacerle seguimiento. */
     const lead = new URLSearchParams(location.search).get("lead");
     if (lead) {
       const sep = elegido.includes("?") ? "&" : "?";
