@@ -5,7 +5,31 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Evita que Google indexe esta página puente -->
   <meta name="robots" content="noindex, nofollow">
-  <title>Redirigiendo…</title>
+  <title>Calendtors</title>
+
+  <!--
+    🖼️ LA TARJETA QUE ENSEÑA INSTAGRAM (2026-08-23)
+
+    Sin esto, al lead le llegaba el enlace pelado en azul y debajo una tarjeta que decía
+    "Redirigiendo…" — que es literalmente el <title> que tenía esta página. Al lado, el enlace
+    DIRECTO de un closer (calendtors.com) se ve con la corona y el nombre, porque Calendtors sí trae
+    sus Open Graph. La diferencia se nota justo en el mensaje del cierre, y confunde: parecen dos
+    cosas distintas cuando llevan al mismo sitio.
+
+    🔑 Son las MISMAS tres etiquetas que sirve Calendtors, copiadas a propósito para que las dos
+    tarjetas se vean idénticas y no haya salto visual entre un lead y otro.
+    ⚠️ `og:image` va ABSOLUTA: la de Calendtors es relativa (`/icon-512.png`) y desde este dominio
+    no resolvería a nada.
+    ⚠️ Y el `noindex` de arriba NO estorba: eso es para los buscadores. El scraper de Meta lee los
+    og: igual — y tampoco ejecuta el JS de abajo, así que ve estas etiquetas y no el redirect.
+  -->
+  <meta property="og:title" content="Calendtors" />
+  <meta property="og:description" content="Agenda tu llamada en el hueco que mejor te venga." />
+  <meta property="og:image" content="https://calendtors.com/icon-512.png" />
+  <meta property="og:url" content="https://elsenoresmipastor77.github.io/agenda-llamada/" />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="description" content="Agenda tu llamada en el hueco que mejor te venga." />
 </head>
 <body>
 
