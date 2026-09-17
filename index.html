@@ -56,6 +56,13 @@
 
        Si algún día quieres volver a repartir, añade otro destino
        aquí abajo con su peso: ej. { url: "...", peso: 30 }.
+
+       🧮 OJO: LOS PESOS SON RELATIVOS, NO PORCENTAJES.
+       El sorteo de abajo suma el total él mismo, así que subir uno
+       SIN bajar los otros no da el porcentaje que dice: poner a Joan
+       en 50 dejando a Jose y Lucas en 34/33 le daba el 42,7% (50 de
+       117), no la mitad. Para que el número sea el real, LOS PESOS
+       TIENEN QUE SUMAR 100.
        ========================================================= */
     const destinos = [
       { url: "https://calendtors.com/jose/escala-tu-marca-personal-junto-a-dios",                  peso: 25 },  // José
