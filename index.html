@@ -77,14 +77,31 @@
       r -= d.peso;
     }
 
-    /* Rastreo del lead: el bot manda ...?lead=<id de ManyChat>. Lo reenviamos al
+    /* Rastreo del lead (ManyChat): el bot manda ...?lead=<id de ManyChat>. Lo reenviamos al
        destino como utm_content (Calendtors lo guarda con la reserva y lo devuelve
        en el webhook invitee.created), así el Worker sabe QUÉ lead de Instagram
        agendó y deja de hacerle seguimiento. */
-    const lead = new URLSearchParams(location.search).get("lead");
-    if (lead) {
-      const sep = elegido.includes("?") ? "&" : "?";
-      elegido += sep + "utm_content=" + encodeURIComponent(lead);
+    const params = new URLSearchParams(location.search);
+    const extra = [];
+    const lead = params.get("lead");
+    if (lead) extra.push("utm_content=" + encodeURIComponent(lead));
+
+    /* Rastreo del VÍDEO de YouTube (2026-10-06): cada vídeo horizontal de
+       josemanuel.mediaa lleva en su descripción este enlace con ?src=ytNN
+       (yt01, yt02…). Va como utm_source/utm_campaign — NUNCA en utm_content,
+       que es el id de ManyChat: el Worker del AI Setter lo tomaría por un
+       contacto. Calendtors guarda los utm_ con la reserva y Nexus los lee
+       para poner "YouTube: <vídeo>" en Agendados. Solo se aceptan letras,
+       números y guiones: lo demás se ignora. */
+    const src = (params.get("src") || "").toLowerCase();
+    if (/^[a-z0-9-]{1,40}$/.test(src)) {
+      if (/^yt\d+$/.test(src)) extra.push("utm_source=youtube", "utm_medium=video");
+      else extra.push("utm_source=" + src);
+      extra.push("utm_campaign=" + src);
+    }
+
+    if (extra.length) {
+      elegido += (elegido.includes("?") ? "&" : "?") + extra.join("&");
     }
 
     window.location.replace(elegido);
